@@ -70,8 +70,10 @@ add_action('woocommerce_product_bulk_edit_save', 'mvsn_bulk_image_save');
 function mvsn_bulk_image_save($product)
 {
 	if (isset($_REQUEST['_mvsn_bulk_image_id'])) {
-		$post_id = $product->get_id();
-		$image_id = $_REQUEST['_mvsn_bulk_image_id'];
-		update_post_meta($post_id, '_thumbnail_id', $image_id);
+		if ($_REQUEST['_mvsn_bulk_image_id'] !== '') {
+			$post_id = $product->get_id();
+			$image_id = $_REQUEST['_mvsn_bulk_image_id'];
+			update_post_meta($post_id, '_thumbnail_id', $image_id);
+		}
 	}
 }
